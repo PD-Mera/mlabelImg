@@ -88,6 +88,7 @@ setup(
     version=about['__version__'],
     description="LabelImg is a graphical image annotation tool and label object bounding boxes in images (Modified Version)",
     long_description=readme + '\n\n' + history,
+    long_description_content_type="text/markdown",
     author="PD-Mera",
     author_email='phuongdong1772000@gmail.com',
     url='https://github.com/PD-Mera/mlabelImg',
