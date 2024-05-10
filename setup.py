@@ -16,7 +16,7 @@ about = {}
 with open(os.path.join(here, 'libs', '__init__.py')) as f:
     exec(f.read(), about)
 
-with open("README.rst", "rb") as readme_file:
+with open("README.md", "rb") as readme_file:
     readme = readme_file.read().decode("UTF-8")
 
 with open("HISTORY.rst", "rb") as history_file:

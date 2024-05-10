@@ -3,13 +3,14 @@ resources/icons/.DS_Store
 resources.py
 
 .idea*
-labelImg.egg-info*
+*.egg-info*
 
 *.pyc
 .*.swp
 
 build/
 dist/
+venv/
 
 tags
 cscope*
