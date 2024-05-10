@@ -19,8 +19,9 @@ with open(os.path.join(here, 'libs', '__init__.py')) as f:
 with open("README.md", "rb") as readme_file:
     readme = readme_file.read().decode("UTF-8")
 
-with open("HISTORY.rst", "rb") as history_file:
-    history = history_file.read().decode("UTF-8")
+# with open("HISTORY.rst", "rb") as history_file:
+#     history = history_file.read().decode("UTF-8")
+history = ""
 
 # OS specific settings
 SET_REQUIRES = []
