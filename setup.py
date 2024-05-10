@@ -32,7 +32,7 @@ elif _platform == "darwin":
    SET_REQUIRES.append('py2app')
 
 required_packages = find_packages()
-required_packages.append('labelImg')
+required_packages.append('mlabelImg')
 
 APP = [NAME + '.py']
 OPTIONS = {
@@ -85,17 +85,17 @@ setup(
     app=APP,
     name=NAME,
     version=about['__version__'],
-    description="LabelImg is a graphical image annotation tool and label object bounding boxes in images",
+    description="LabelImg is a graphical image annotation tool and label object bounding boxes in images (Modified Version)",
     long_description=readme + '\n\n' + history,
-    author="TzuTa Lin",
-    author_email='tzu.ta.lin@gmail.com',
-    url='https://github.com/tzutalin/labelImg',
+    author="PD-Mera",
+    author_email='phuongdong1772000@gmail.com',
+    url='https://github.com/PD-Mera/mlabelImg',
     python_requires=REQUIRES_PYTHON,
-    package_dir={'labelImg': '.'},
+    package_dir={'mlabelImg': '.'},
     packages=required_packages,
     entry_points={
         'console_scripts': [
-            'labelImg=labelImg.labelImg:main'
+            'mlabelImg=mlabelImg.mlabelImg:main'
         ]
     },
     include_package_data=True,
