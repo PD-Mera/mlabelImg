@@ -841,9 +841,9 @@ class MainWindow(QMainWindow, WindowMixin):
 
         unique_text_list = list(set(items_text_list))
         # Add a null row for showing all the labels
-        unique_text_list.append("")
         unique_text_list.sort()
-
+        unique_text_list.insert(0, "[SHOW ALL]")
+        unique_text_list.insert(1, "[HIDE ALL]")
         self.combo_box.update_items(unique_text_list)
 
     def save_labels(self, annotation_file_path):
@@ -895,8 +895,10 @@ class MainWindow(QMainWindow, WindowMixin):
     def combo_selection_changed(self, index):
         text = self.combo_box.cb.itemText(index)
         for i in range(self.label_list.count()):
-            if text == "":
+            if text == "[SHOW ALL]":
                 self.label_list.item(i).setCheckState(2)
+            elif text == "[HIDE ALL]":
+                self.label_list.item(i).setCheckState(0)
             elif text != self.label_list.item(i).text():
                 self.label_list.item(i).setCheckState(0)
             else:

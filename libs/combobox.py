@@ -29,5 +29,9 @@ class ComboBox(QWidget):
     def update_items(self, items):
         self.items = items
 
+        current_text = "[SHOW ALL]" if self.cb.currentText() == "" else self.cb.currentText()
+        new_index = items.index(current_text)
         self.cb.clear()
         self.cb.addItems(self.items)
+        self.cb.setCurrentIndex(new_index)
+
