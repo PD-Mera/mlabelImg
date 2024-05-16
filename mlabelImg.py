@@ -894,8 +894,10 @@ class MainWindow(QMainWindow, WindowMixin):
 
     def combo_selection_changed(self, index):
         text = self.combo_box.cb.itemText(index)
+        text = "" if text == "[SHOW ALL]" else text
+            
         for i in range(self.label_list.count()):
-            if text == "[SHOW ALL]":
+            if text == "": #"[SHOW ALL]":
                 self.label_list.item(i).setCheckState(2)
             elif text == "[HIDE ALL]":
                 self.label_list.item(i).setCheckState(0)
