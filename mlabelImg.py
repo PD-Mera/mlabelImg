@@ -260,7 +260,7 @@ class MainWindow(QMainWindow, WindowMixin):
 
         close = action(get_str('closeCur'), self.close_file, 'Ctrl+W', 'close', get_str('closeCurDetail'))
 
-        delete_image = action(get_str('deleteImg'), self.delete_image, 'Ctrl+Shift+D', 'close', get_str('deleteImgDetail'))
+        delete_image = action(get_str('deleteImg'), self.delete_image, 't', 'close', get_str('deleteImgDetail'))
 
         reset_all = action(get_str('resetAll'), self.reset_all, None, 'resetall', get_str('resetAllDetail'))
 
@@ -1448,14 +1448,24 @@ class MainWindow(QMainWindow, WindowMixin):
         self.actions.saveAs.setEnabled(False)
 
     def delete_image(self):
+        tmp_idx = self.cur_img_idx
         delete_path = self.file_path
         if delete_path is not None:
             self.open_next_image()
             self.cur_img_idx -= 1
             self.img_count -= 1
             if os.path.exists(delete_path):
+                basename = os.path.basename(os.path.splitext(delete_path)[0])
+                txt_path = os.path.join(self.default_save_dir, basename + TXT_EXT)
                 os.remove(delete_path)
+                os.remove(txt_path)
+
             self.import_dir_images(self.last_open_dir)
+
+        self.cur_img_idx = tmp_idx
+        filename = self.m_img_list[tmp_idx]
+        if filename:
+            self.load_file(filename)
 
     def reset_all(self):
         self.settings.reset()
@@ -1562,7 +1572,7 @@ class MainWindow(QMainWindow, WindowMixin):
         self.set_format(FORMAT_YOLO)
         t_yolo_parse_reader = YoloReader(txt_path, self.image)
         shapes = t_yolo_parse_reader.get_shapes()
-        print(shapes)
+        print("load_yolo_txt_by_filename", shapes)
         self.load_labels(shapes)
         self.canvas.verified = t_yolo_parse_reader.verified
 

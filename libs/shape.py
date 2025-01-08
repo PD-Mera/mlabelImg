@@ -128,7 +128,9 @@ class Shape(object):
                         self.label = ""
                     if min_y < min_y_label:
                         min_y += min_y_label
-                    painter.drawText(min_x, min_y, self.label)
+                    # print(int(min_x), int(min_y), self.label)
+                    painter.drawText(int(min_x), int(min_y), self.label)
+                    # painter.drawText(int(min_x), int(min_y * 1.75 + 30) , self.label)
 
             if self.fill:
                 color = self.select_fill_color if self.selected else self.fill_color
