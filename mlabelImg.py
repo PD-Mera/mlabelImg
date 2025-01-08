@@ -1310,6 +1310,26 @@ class MainWindow(QMainWindow, WindowMixin):
             item = QListWidgetItem(imgPath)
             self.file_list_widget.addItem(item)
 
+    def import_dir_images_after_delete(self, dir_path, tmp_idx):
+        if not self.may_continue() or not dir_path:
+            return
+
+        self.last_open_dir = dir_path
+        self.dir_name = dir_path
+        self.file_path = None
+        self.file_list_widget.clear()
+        self.m_img_list = self.scan_all_images(dir_path)
+        self.img_count = len(self.m_img_list)
+        # self.open_next_image()
+        for imgPath in self.m_img_list:
+            item = QListWidgetItem(imgPath)
+            self.file_list_widget.addItem(item)
+
+        self.cur_img_idx = tmp_idx
+        filename = self.m_img_list[tmp_idx]
+        if filename:
+            self.load_file(filename)
+
     def verify_image(self, _value=False):
         # Proceeding next image without dialog if having any label
         if self.file_path is not None:
@@ -1460,12 +1480,9 @@ class MainWindow(QMainWindow, WindowMixin):
                 os.remove(delete_path)
                 os.remove(txt_path)
 
-            self.import_dir_images(self.last_open_dir)
+            self.import_dir_images_after_delete(self.last_open_dir, tmp_idx)
 
-        self.cur_img_idx = tmp_idx
-        filename = self.m_img_list[tmp_idx]
-        if filename:
-            self.load_file(filename)
+        
 
     def reset_all(self):
         self.settings.reset()
