@@ -1326,6 +1326,12 @@ class MainWindow(QMainWindow, WindowMixin):
             self.file_list_widget.addItem(item)
 
         self.cur_img_idx = tmp_idx
+        
+        # if delete the last image
+        if tmp_idx == len(self.m_img_list):
+            tmp_idx = 0
+            self.cur_img_idx = 0
+
         filename = self.m_img_list[tmp_idx]
         if filename:
             self.load_file(filename)
